@@ -7,8 +7,8 @@ const up = document.getElementById("up");
 let currentFloor = 0; // Assuming that the list is at ground floor at the starting
 let mdUp = 0,
   mdDown = 0;
-console.log("hello ");
 
+//function to play lift sound
 const liftReach = () => {
   let liftSound = new Audio(
     "lift-tone/elevator-ding-at-arenco-tower-dubai-38520.mp3"
@@ -17,6 +17,7 @@ const liftReach = () => {
   liftSound.play();
 };
 
+//function to reach to floor
 const floorFunction = (floor) => {
   console.log(floor);
   if (floor == 2) {
@@ -30,6 +31,8 @@ const floorFunction = (floor) => {
   currentFloor = floor;
 };
 
+
+//function for down button
 const downFunction = () => {
   console.log("hello");
   down.style.backgroundColor = "green";
@@ -45,13 +48,14 @@ const downFunction = () => {
       floorFunction(0);
       setTimeout(() => {
         down.style.backgroundColor = "white";
-
         lift.style.transition = "5s linear";
         liftReach();
       }, 10000);
     }
   }
 };
+
+//function for up button
 const upFunction = () => {
   console.log("hello");
   up.style.backgroundColor = "green";
@@ -74,24 +78,35 @@ const upFunction = () => {
   }
 };
 
+//function for middle up button
 const middleUpFunction = () => {
   console.log("hello");
   mdUp = true;
   middleUp.style.backgroundColor = "green";
   if (currentFloor == 1) {
     floorFunction(2);
+    setTimeout(() => {
+      liftReach();
+    }, 5000);
   }
   setTimeoutFUcntion();
 };
+
+// //function for middle down button
 const middleDownFunction = () => {
   console.log("hello");
   mdDown = true;
   middleDown.style.backgroundColor = "green";
-  if (currentFloor == 1) floorFunction(0);
+  if (currentFloor == 1){ floorFunction(0);
+    setTimeout(() => {
+      liftReach();
+    }, 5000);
+  }
   setTimeoutFUcntion();
 };
 
 const setTimeoutFUcntion = () => {
+ 
   setTimeout(() => {
     middleDown.style.background = "white";
     middleUp.style.background = "white";
@@ -100,6 +115,8 @@ const setTimeoutFUcntion = () => {
   }, 10000);
 };
 
+
+//event listeners
 floorFunction(0);
 down.addEventListener("click", downFunction);
 up.addEventListener("click", upFunction);
